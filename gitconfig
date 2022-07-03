@@ -1,0 +1,50 @@
+[user]
+	email = maya@circleci.com
+	name = Maya
+[alias]
+	current-branch = branch --show-current
+	default-branch = !zsh -c 'git remote show origin | grep \"HEAD branch\" | cut -d \":\" -f 2 | xargs'
+	db = default-branch
+	s = switch
+
+	root = !zsh -c 'pwd'
+
+
+	fixup = commit --amend --no-edit
+	nvm = reset --soft HEAD~1
+
+	please = push --force-with-lease
+
+	fplease = !zsh -c '\
+		git fixup \
+		&& git please'
+	fp = fplease
+	afp = !zsh -c 'git add . && git fplease'
+
+	push-current-branch = !zsh -c 'git push --set-upstream origin "$(git current-branch)"'
+	pcb = push-current-branch
+
+	remove-current-branch = !/Users/roy/.config/bin/prune
+	rcb = remove-current-branch
+
+	switch-and-update = !zsh -c '\
+		git remove-current-branch \
+		&& git switch '$1' \
+		&& git update' -
+	sau = switch-and-update
+
+	update = !zsh -c '\
+		export DEFAULT_BRANCH="$(git default-branch)" \
+		&& git fetch origin "${DEFAULT_BRANCH}:${DEFAULT_BRANCH}" \
+		&& git rebase "${DEFAULT_BRANCH}"'
+
+	oops-branch = !zsh -c '\
+		git switch -c '$1' \
+		&& git switch - \
+		&& git reset --hard HEAD~1 \
+		&& git switch "$1"' -
+
+	uplease = !zsh -c '\
+		git update \
+		&& git please'
+	upl = uplease
