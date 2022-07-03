@@ -1,7 +1,7 @@
 
-function reverseString(str: String)
+function reverseString(str: string)
 {
-    if(!str)
+    if(str === null)
     {
         return;
     }
@@ -17,18 +17,21 @@ function reverseString(str: String)
 
 function reverseStringMaya(s: string)
 {
+    if(s === null)
+    {
+        return;
+    }
     const stringArray = s.split('');
-    for(let low = 0; low < s.length; low++) {
+    for(let low = 0; low < s.length/2; low++) {
         const temp = stringArray[low];
-        const high = s.length - low - 1
+        const high = s.length - low - 1;
         stringArray[low] = stringArray[high];
         stringArray[high] = temp;
     }
 
     return stringArray.join('');
 }
-
-console.log(reverseString("Hello From The Other Side"));
+console.log(reverseString('Hello Fron The Other Side'));
 console.log(reverseString(null));
 console.log(reverseStringMaya('Hello Fron The Other Side'));
 console.log(reverseStringMaya(null));
