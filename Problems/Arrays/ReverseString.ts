@@ -1,5 +1,5 @@
 
-function reverseString(str: string)
+function reverseString(str: string | null)
 {
     if(str === null)
     {
@@ -15,7 +15,7 @@ function reverseString(str: string)
     return s.join('');
 }
 
-function reverseStringMaya(s: string)
+function reverseStringMaya(s: string | null)
 {
     if(s === null)
     {
